@@ -1,0 +1,26 @@
+{
+    "name": "bitcoin",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^16.10.1",
+        "@types/node-forge": "^0.10.5",
+        "typescript": "^4.4.3"
+    },
+    "dependencies": {
+        "big-number": "^2.0.0",
+        "bn": "^1.0.5",
+        "bn.js": "^5.2.0",
+        "curves": "^1.1.0",
+        "elliptic": "^6.5.4",
+        "merkletreejs": "^0.2.24",
+        "node-forge": "^0.10.0"
+    }
+}
