@@ -1,4 +1,5 @@
-import {ECurve, Point} from './e_curve'
+import {ECurve} from './e_curve'
+import {Point, double, add, multiply} from './point' 
 import { curve,test_curve } from './curve';
 const BN = require('bn.js');
 const crypto = require('crypto');
@@ -10,31 +11,34 @@ function hash (obj:any) {
 
 //Test Run 
 console.log('-------------------------------------Test For Utilities-------------------------------------');
-const sk_test = new BN(1);
-const cryp_test = new ECurve(new test_curve(), sk_test);
+const test_c = new test_curve();
 
 const point1 = new Point(new BN(5),new BN(1))
 const point2 = new Point(new BN(6),new BN(3))
+const point3 = new Point(new BN(5),new BN(1))
 
-const add = cryp_test.add(point1,point2);
+console.log('Equal test (should be false): '+ point1.equals(point2));
+console.log('Equal test (should be true): '+ point1.equals(point3));
+
+const addRes = add(point1,point2, test_c.p, test_c.a);
 
 console.log("Addition test (value should be (10,6)):")
-console.log("( "+add.x.toNumber() + " , "+add.y.toNumber()+" )");
+console.log("( "+addRes.x.toNumber() + " , "+addRes.y.toNumber()+" )");
 
-const double = cryp_test.double(point1);
+const doubleRes = double(point1, test_c.a, test_c.p);
 
 console.log("Doubling test (value should be (6,3)):")
-console.log("( "+double.x.toNumber() + " , "+double.y.toNumber()+" )");
+console.log("( "+doubleRes.x.toNumber() + " , "+doubleRes.y.toNumber()+" )");
 
-let mult = cryp_test.multiply(point1, new BN(1))
+let mult = multiply(point1, new BN(1), test_c.p, test_c.a)
 console.log("Multiplying test (value should be (5,1)):")
 console.log("( "+mult.x.toNumber() + " , "+mult.y.toNumber()+" )");
 
-mult = cryp_test.multiply(point1, new BN(2))
+mult = multiply(point1, new BN(2),test_c.p, test_c.a)
 console.log("Multiplying test (value should be (6,3)):")
 console.log("( "+mult.x.toNumber() + " , "+mult.y.toNumber()+" )");
 
-mult = cryp_test.multiply(point1, new BN(18))
+mult = multiply(point1, new BN(18),test_c.p, test_c.a)
 console.log("Multiplying test (value should be (5,16)):")
 console.log("( "+mult.x.toNumber() + " , "+mult.y.toNumber()+" )");
 

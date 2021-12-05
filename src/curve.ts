@@ -1,4 +1,4 @@
-import { Point } from "./e_curve";
+import { Point } from "./point";
 
 const BN = require('bn.js');
 
